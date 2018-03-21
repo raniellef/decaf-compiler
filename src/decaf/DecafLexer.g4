@@ -21,7 +21,7 @@ WS_ : (' ' | '\n' ) -> skip;
 
 SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
-CHAR : ('a..z'| 'A..Z'| '1..9')+;
+CHAR :'\'' [a-z|A-Z|0-9]+ '\'';
 STRING : '"' (ESC|~'"')* '"';
 
 fragment
