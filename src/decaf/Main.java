@@ -38,7 +38,14 @@ class Main {
 						case DecafLexer.CHAR:
 							type = " CHAR ";
 							break;
-		        			}
+		        			
+						case DecafLexer.STRING:
+							type = " STRING ";
+							break;
+						case DecafLexer.INT:
+							type = " INT ";
+							break;
+						}
 						System.out.println (token.getLine() + type + " " + text);
 		        		}
 		        		done = true;
