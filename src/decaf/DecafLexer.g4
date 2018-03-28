@@ -9,7 +9,18 @@ options
   language=Java;
 }
 
-
+BOOLEAN : 'boolean';
+BREAK : 'break';
+CALLOUT : 'callout';
+CLASS : 'class';
+CONTINUE : 'continue';
+IF : 'if';
+ELSE : 'else';
+BOOLEANLITERAL : 'false'|'true';
+FOR : 'for';
+INT : 'int';
+RETURN : 'return';
+VOID: 'void';
 
 LCURLY : '{';
 RCURLY : '}';
@@ -20,10 +31,10 @@ WS_ : [ \t\r\n]+ -> skip ;
 
 SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
-INT : '0x' [0-9|a-f|A-F]+ | ('-') [0-9]+ | [0-9]+;
+INTEGER : '0x' [0-9|a-f|A-F]+ | ('-') [0-9]+ | [0-9]+;
 
-CHAR :'\'' [\u0020-\u0088] '\'';
+CHAR :'\'' ([\u0020-\u0088] | ESC) '\'';
 STRING : '\"' [\u0020-\u0088]+ '\"';
 
 fragment
-ESC :  '\\' ('n'|'"');
+ESC :  ('\\' ('n'|'"')|[ \t\r\n]+);
