@@ -28,7 +28,7 @@ tipo: INT | BOOLEAN ;
 statment: location assign_op expr SEMICOL
 | call_metodo SEMICOL
 | IF (expr) block | (ELSE block)  
-| FOR ID = expr COL expr block  
+| FOR LPAR ID = expr COL expr block RPAR  
 | RETURN ( expr ) SEMICOL
 | BREAK
 | CONTINUE SEMICOL 
