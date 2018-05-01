@@ -25,7 +25,7 @@ decl_variavel: tipo id ( COL id)* SEMICOL ;
 
 tipo: INT | BOOLEAN ;
 
-statment: location asssign_op expr SEMICOL
+statment: location assign_op expr SEMICOL
 | call_metodo SEMICOL
 | IF (expr) block | (ELSE block)  
 | FOR id = expr COL expr block  
@@ -54,17 +54,17 @@ callout_arg: expr | string_literal ;
 
 bin_op: arith_op| rel_op| eq_op | cond_op ;
 
-arith_op: '+' | '-' | '*' | '/' | '%' ;
+arith_op: OP_ARITH ;
 
-rel_op: '<' | '>' | '<=' | '>=' ;
+rel_op: OP_REL ;
 
-eq_op: '==' | '!=' ;
+eq_op: OP_EQ ;
 
-cond_op: '&&' | '||' ;
+cond_op: OP_COND ;
 
-litral: int_literal | char_literal | bool_literal ;
+literal: int_literal | char_literal | bool_literal ;
 
-id: alpha alpha_num* ;
+id: ID ;
 
 alpha_num: alpha | digit ;
 
@@ -82,9 +82,9 @@ hex_literal: HEX_PREFIX hex_digit hex_digit* ;
 
 bool_literal: BOOLEANLITERAL ;
 
-char_literal: '\''char* '\'' ;
+char_literal: CHAR ;
 
-string_literal: '\"' char* '\"' ;
+string_literal: STRING ;
 
 
 

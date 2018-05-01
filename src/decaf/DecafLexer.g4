@@ -9,7 +9,7 @@ options
   language=Java;
 }
 
-CLASS_PROG : 'class program'
+CLASS_PROG : 'class program';
 BOOLEAN : 'boolean';
 BREAK : 'break';
 CALLOUT : 'callout';
