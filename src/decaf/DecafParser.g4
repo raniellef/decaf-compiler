@@ -15,20 +15,20 @@ options
 
 program: CLASS_PROG LCURLY decl_campo* decl_metodo* RCURLY ;
 
-decl_campo: ( tipo id | tipo id  LCOL int_literal RCOL) (COL tipo id |COL tipo id  LCOL int_literal RCOL)* SEMICOL ;
+decl_campo: ( tipo ID | tipo ID  LCOL int_literal RCOL) (COL tipo ID |COL tipo ID  LCOL int_literal RCOL)* SEMICOL ;
 
-decl_metodo: ( tipo | VOID ) id ( LPAR tipo id ( COL tipo id)* RPAR ) block ;
+decl_metodo: ( tipo | VOID ) ID ( LPAR tipo ID ( COL tipo ID)* RPAR ) block ;
 
 block: LCURLY decl_variavel* statment* RCURLY ;
 
-decl_variavel: tipo id ( COL id)* SEMICOL ;
+decl_variavel: tipo ID ( COL ID)* SEMICOL ;
 
 tipo: INT | BOOLEAN ;
 
 statment: location assign_op expr SEMICOL
 | call_metodo SEMICOL
 | IF (expr) block | (ELSE block)  
-| FOR id = expr COL expr block  
+| FOR ID = expr COL expr block  
 | RETURN ( expr ) SEMICOL
 | BREAK
 | CONTINUE SEMICOL 
@@ -38,9 +38,9 @@ assign_op: OP_ASSIGN ;
 
 call_metodo: nome_metodo LPAR (expr (COL expr)*) RPAR ;
 
-nome_metodo: id ;
+nome_metodo: ID ;
 
-location: id | id LCOL expr RCOL ;
+location: ID | ID LCOL expr RCOL ;
 
 expr: location 
 |call_metodo 
@@ -63,8 +63,6 @@ eq_op: OP_EQ ;
 cond_op: OP_COND ;
 
 literal: int_literal | char_literal | bool_literal ;
-
-id: ID ;
 
 alpha_num: alpha | digit ;
 
