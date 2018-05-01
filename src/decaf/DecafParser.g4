@@ -13,42 +13,42 @@ options
 // + significa 1 ou varias ,só pode ser usado em lista
 // * significa  0 ou varias
 
-program: 'class Program' '{' decl_campo* decl_metodo* '}' ;
+program: CLASS_PROG LCURLY decl_campo* decl_metodo* RCURLY ;
 
-decl_campo: ( tipo id | tipo id  '[' int_literal ']') (',' tipo id |',' tipo id  '[' int_literal ']')* ';' ;
+decl_campo: ( tipo id | tipo id  LCOL int_literal RCOL) (COL tipo id |COL tipo id  LCOL int_literal RCOL)* SEMICOL ;
 
-decl_metodo: ( tipo | 'void' ) id ( '(' tipo id (','tipo id)* ')' ) block ;
+decl_metodo: ( tipo | VOID ) id ( LPAR tipo id ( COL tipo id)* RPAR ) block ;
 
-block: '{'decl_variavel*statment* '}' ;
+block: LCURLY decl_variavel* statment* RCURLY ;
 
-decl_variavel: tipo id (',' id)* ';' ;
+decl_variavel: tipo id ( COL id)* SEMICOL ;
 
-tipo: 'int' | 'boolean' ;
+tipo: INT | BOOLEAN ;
 
-statment: location asssign_op expr ';'
-| call_metodo ';' 
-| 'if' (expr) block | ('else' block)  
-| 'for' id = expr ',' expr block  
-| 'return' ( expr ) ';'
-| 'break'
-| continue ';' 
-| 'block' ;
+statment: location asssign_op expr SEMICOL
+| call_metodo SEMICOL
+| IF (expr) block | (ELSE block)  
+| FOR id = expr COL expr block  
+| RETURN ( expr ) SEMICOL
+| BREAK
+| CONTINUE SEMICOL 
+| block ;
 
-assign_op: '='  | '+=' | '-=' ;
+assign_op: OP_ASSIGN ;
 
-call_metodo: nome_metodo '(' (expr (',' expr)*) ')' ;
+call_metodo: nome_metodo LPAR (expr (COL expr)*) RPAR ;
 
 nome_metodo: id ;
 
-location: id | id '[' expr ']';
+location: id | id LCOL expr RCOL ;
 
 expr: location 
 |call_metodo 
 |literal 
 |expr bin_op expr 
-|'-' expr 
-| '!' expr 
-|'('expr')' ;
+|MINUS expr 
+|EXCL expr 
+|LPAR expr RPAR ;
 
 callout_arg: expr | string_literal ;
 
@@ -68,19 +68,19 @@ id: alpha alpha_num* ;
 
 alpha_num: alpha | digit ;
 
-alpha : [a-zA-Z] ; //colocar o token q esta no lexer
+alpha : CHAR ; //colocar o token q esta no lexer
 
-digit: [0-9] ; //colocar o token q esta no lexer
+digit: DIGIT ; //colocar o token q esta no lexer
 
-hex_digit: digit [a-f |A-F] ;
+hex_digit: HEX_DIGIT ;
 
 int_literal: decimal_literal |hex_literal ;
 
 decimal_literal: digit digit* ;
 
-hex_literal: '0x' hex_digit hex_digit* ;
+hex_literal: HEX_PREFIX hex_digit hex_digit* ;
 
-bool_literal: 'true'|'false' ;
+bool_literal: BOOLEANLITERAL ;
 
 char_literal: '\''char* '\'' ;
 
