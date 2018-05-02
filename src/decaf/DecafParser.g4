@@ -15,9 +15,9 @@ options
 
 program: CLASS_PROG LCURLY decl_campo* decl_metodo* RCURLY ;
 
-decl_campo: ( tipo ID | tipo ID  LCOL int_literal RCOL) (COL tipo ID |COL tipo ID  LCOL int_literal RCOL)* SEMICOL ;
+decl_campo:  tipo ID (COL ID)* SEMICOL | tipo ID LCOL decimal_literal RCOL (COL ID LCOL decimal_literal RCOL)*  SEMICOL ;
 
-decl_metodo: ( tipo | VOID ) ID ( LPAR tipo ID ( COL tipo ID)* RPAR ) block ;
+decl_metodo: ( tipo | VOID ) ID LPAR  (tipo ID ( COL tipo ID)* )? RPAR block ;
 
 block: LCURLY decl_variavel* statment* RCURLY ;
 
@@ -28,7 +28,7 @@ tipo: INT | BOOLEAN ;
 statment: location assign_op expr SEMICOL
 | call_metodo SEMICOL
 | IF LPAR expr RPAR block | (ELSE block)  
-| FOR LPAR ID = expr COL expr block RPAR
+| FOR LPAR ID EQUAL expr COL expr block RPAR
 | RETURN ( expr ) SEMICOL
 | BREAK
 | CONTINUE SEMICOL 

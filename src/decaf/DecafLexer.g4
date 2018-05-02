@@ -9,7 +9,7 @@ options
   language=Java;
 }
 
-CLASS_PROG : 'class program';
+CLASS_PROG : 'class Program';
 BOOLEAN : 'boolean';
 BREAK : 'break';
 CALLOUT : 'callout';
@@ -39,7 +39,8 @@ CHAR :'\'' ([\u0020-\u0021\u0023-\u0026\u0028-\u005b\u005d-\u0088] | ESC) '\'';
 STRING : '\"' [\u0020-\u0088]+ '\"';
 
 OP_BIN : ( OP_ARITH | OP_REL | OP_COND | OP_EQ );
-OP_ASSIGN : ( '=' | '+=' | '-=' );
+OP_ASSIGN : ( EQUAL | '+=' | '-=' );
+EQUAL : '=' ;
 MINUS : '-';
 OP_ARITH : ( '+' | MINUS | '*' | '/' | '%' );
 OP_REL :  ( '<' | '>' | '<=' | '>=' );
@@ -61,4 +62,4 @@ RCURLY : '}' ;
 EXCL : '!' ;
 
 fragment
-ESC :  '\\' ('n'|'"'|'r'|'t'|'\\');
+ESC :  '\\' ('n'|'"'|'r'|'t'|'\\'|' ');
