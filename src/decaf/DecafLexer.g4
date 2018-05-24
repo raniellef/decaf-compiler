@@ -30,22 +30,32 @@ WS_ : [ \t\r\n]+ -> skip ;
 
 SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
-INTEGER : HEX_PREFIX HEX_DIGIT+ | MINUS DIGIT+ | DIGIT+;
-DIGIT : [0-9];
-HEX_PREFIX: '0x' ;
-HEX_DIGIT : (DIGIT | [a-fA-F]);
+DIGIT : [0-9]+;
+HEXA : '0x' ('0'..'9' | 'a'..'f' | 'A'..'F')*;
 
 CHAR :'\'' ([\u0020-\u0021\u0023-\u0026\u0028-\u005b\u005d-\u0088] | ESC) '\'';
 STRING : '\"' [\u0020-\u0088]+ '\"';
 
-OP_BIN : ( OP_ARITH | OP_REL | OP_COND | OP_EQ );
-OP_ASSIGN : ( EQUAL | '+=' | '-=' );
-EQUAL : '=' ;
+ATRIBUICAO : '=' ;
 MINUS : '-';
-OP_ARITH : ( '+' | MINUS | '*' | '/' | '%' );
-OP_REL :  ( '<' | '>' | '<=' | '>=' );
-OP_COND : ( '&&' | '||' );
-OP_EQ : ( '==' | '!=' );
+SOMA : '+';
+MULT : '*';
+DIV : '/';
+MOD : '%';
+
+MAIOR : '>';
+MENOR : '<';
+MAIORIGUAL : '>=';
+MENORIGUAL : '<=';
+
+AND : '&&';
+OR : '||';
+
+INCREMENTO : '+=';
+DECREMENTO : '-=';
+
+IGUALDADE : '==';
+DIFERENTE : '!=';
 
 SEMICOL : ';' ; 
 COL : ',' ;
