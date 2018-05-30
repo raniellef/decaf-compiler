@@ -24,7 +24,7 @@ RETURN : 'return';
 VOID: 'void';
 
 
-ID  : [a-zA-Z_] ([a-zA-Z_] | [0-9])*;
+IDENTIFIER  : [a-zA-Z_] ([a-zA-Z_] | [0-9])*;
 
 WS_ : [ \t\r\n]+ -> skip ;
 

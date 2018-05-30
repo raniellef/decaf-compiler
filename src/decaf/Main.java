@@ -16,7 +16,7 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import java6035.tools.CLI.*;
 //import DecafSymbol;
-import DecafSymbolsAndScopes;
+import decaf.DecafSymbolsAndScopes;
 
 class Main {
     public static void main(String[] args) {
@@ -59,7 +59,7 @@ class Main {
 									type = " BOOLEANLITERAL";
 									break;
 */
-						case DecafLexer.ID:
+						case DecafLexer.IDENTIFIER:
 		        				type = " IDENTIFIER";
 		        				break;
 		        			
@@ -70,7 +70,7 @@ class Main {
 						case DecafLexer.STRING:
 							type = " STRING ";
 							break;
-						case DecafLexer.INTEGER:
+						case DecafLexer.DIGIT:
 							type = " INT ";
 							break;
 						case DecafLexer.BOOLEANLITERAL:
@@ -118,6 +118,7 @@ class Main {
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     frame.setSize(200,200);
                     frame.setVisible(true);
+		}
                 }else if (CLI.target == CLI.INTER) {
 				// Primeiro faz o parsing da cadeia
 				DecafLexer lexer = new DecafLexer(new ANTLRInputStream(inputStream));
@@ -156,7 +157,7 @@ class Main {
 
 			}
 
-            }
+            
         	
         } catch(Exception e) {
         	// print the error:

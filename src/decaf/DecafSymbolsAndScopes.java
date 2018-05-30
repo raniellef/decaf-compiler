@@ -30,11 +30,11 @@ public class DecafSymbolsAndScopes extends DecafParserBaseListener {
         System.out.println(globals);
     }
 
-    @Override
-    public void enterMethod_decl(DecafParser.Method_declContext ctx) {
+    //@Override
+    public void enterMethod_decl(DecafParser.Decl_metodoContext ctx) {
         String name = ctx.IDENTIFIER().getText();
-        int typeTokenType = ctx.type().start.getType();
-        DecafSymbol.Type type = this.getType(typeTokenType);
+        //int typeTokenType = ctx.tipo().start.getType();
+        //DecafSymbol.Type type = this.getType(typeTokenType);
 
         // push new scope by making new one that points to enclosing scope
         FunctionSymbol function = new FunctionSymbol(name);
@@ -45,8 +45,8 @@ public class DecafSymbolsAndScopes extends DecafParserBaseListener {
         pushScope(function);
     }
 
-    @Override
-    public void exitMethod_decl(DecafParser.Method_declContext ctx) {
+    //@Override
+    public void exitMethod_decl(DecafParser.Decl_metodoContext ctx) {
         popScope();
     }
 
@@ -62,12 +62,12 @@ public class DecafSymbolsAndScopes extends DecafParserBaseListener {
         popScope();
     }
 
-    @Override
+    //@Override
     public void enterDecl(DecafParser.DeclContext ctx) {
-        defineVar(ctx.type(), ctx.IDENTIFIER().getSymbol());
+        defineVar(ctx.tipo(), ctx.IDENTIFIER().getSymbol());
     }
 
-    @Override
+    //@Override
     public void exitDecl(DecafParser.DeclContext ctx) {
         String name = ctx.IDENTIFIER().getSymbol().getText();
         Symbol var = currentScope.resolve(name);
@@ -79,7 +79,7 @@ public class DecafSymbolsAndScopes extends DecafParserBaseListener {
         }
     }
 
-    void defineVar(DecafParser.TypeContext typeCtx, Token nameToken) {
+    void defineVar(DecafParser.TipoContext typeCtx, Token nameToken) {
         int typeTokenType = typeCtx.start.getType();
         VariableSymbol var = new VariableSymbol(nameToken.getText());
 
@@ -131,7 +131,7 @@ public class DecafSymbolsAndScopes extends DecafParserBaseListener {
     public static DecafSymbol.Type getType(int tokenType) {
         switch ( tokenType ) {
             case DecafParser.VOID :  return DecafSymbol.Type.tVOID;
-            case DecafParser.INTEGER_LITERAL :   return DecafSymbol.Type.tINT;
+            case DecafParser.DIGIT :   return DecafSymbol.Type.tINT;
         }
         return DecafSymbol.Type.tINVALID;
     }

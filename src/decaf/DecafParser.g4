@@ -15,20 +15,24 @@ options
 
 program: CLASS_PROG LCURLY decl_campo* decl_metodo* RCURLY ;
 
-decl_campo:  tipo ID (COL ID)* SEMICOL | tipo ID LCOL int_literal RCOL (COL ID LCOL int_literal RCOL)*  SEMICOL ;
+decl_campo:  decl (COL IDENTIFIER)* SEMICOL | decl LCOL int_literal RCOL (COL IDENTIFIER LCOL int_literal RCOL)*  SEMICOL ;
 
-decl_metodo: ( tipo | VOID ) ID LPAR  (tipo ID ( COL tipo ID)* )? RPAR block ;
+tipo_decl : tipo | VOID;
+param : decl;
+decl_metodo: tipo_decl IDENTIFIER LPAR  (param ( COL param)* )? RPAR block ;
+
+decl : tipo IDENTIFIER ;
 
 block: LCURLY (decl_variavel | statment)* RCURLY ;
 
-decl_variavel: tipo ID ( COL ID)* SEMICOL ;
+decl_variavel: decl ( COL IDENTIFIER)* SEMICOL ;
 
 tipo: INT | BOOLEAN ;
 
 statment: location assign_op expr SEMICOL
 | call_metodo SEMICOL
 | IF LPAR expr RPAR block (ELSE block)?  
-| FOR ID ATRIBUICAO expr COL expr block 
+| FOR IDENTIFIER ATRIBUICAO expr COL expr block 
 | RETURN ( expr ) SEMICOL
 | BREAK SEMICOL
 | CONTINUE SEMICOL 
@@ -39,9 +43,9 @@ assign_op: ATRIBUICAO | INCREMENTO | DECREMENTO;
 call_metodo: nome_metodo LPAR (expr (COL expr)*)? RPAR 
 | CALLOUT LPAR (string_literal(COL callout_arg(COL callout_arg)*)?) RPAR;
 
-nome_metodo: ID ;
+nome_metodo: IDENTIFIER ;
 
-location: ID | ID LCOL expr RCOL ;
+location: IDENTIFIER | IDENTIFIER LCOL expr RCOL ;
 
 expr: location 
 |call_metodo 
