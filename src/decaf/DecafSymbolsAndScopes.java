@@ -30,6 +30,11 @@ public class DecafSymbolsAndScopes extends DecafParserBaseListener {
         System.out.println(globals);
     }
 
+    @Override 
+    public void enterDecl_campo(DecafParser.Decl_campoContext ctx) {
+
+
+    }
     //@Override
     public void enterMethod_decl(DecafParser.Decl_metodoContext ctx) {
         String name = ctx.IDENTIFIER().getText();
